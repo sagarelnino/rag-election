@@ -1,0 +1,16 @@
+
+.image-show{
+    display: flex;
+    justify-content: center;
+}
+
+.image-show img{
+    max-height: 350px;
+    width: auto;
+}
+.info{
+    margin-top: 20px;
+}
+.info tbody, td, tfoot, th, thead, tr {
+    text-align: center;
+}
