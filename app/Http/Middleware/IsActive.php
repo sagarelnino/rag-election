@@ -24,6 +24,8 @@ class IsActive
             if ($user->is_approved == true) {
                 return $next($request);
             }
+        } elseif ($user->user_type == User::USER_TYPE_ADMIN) {
+            return $next($request);
         }
         return redirect('login');
     }
