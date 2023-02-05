@@ -49,12 +49,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/elections">Elections</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/voters">Voters</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/approval">Approval</a>
-                        </li>
+                        @if (auth()->user()->user_type == App\Models\User::USER_TYPE_ADMIN)
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/voters">Voters</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/approval">Approval</a>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

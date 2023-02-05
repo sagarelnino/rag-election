@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         /**
          * User Defined
          */
-        'admin' => \App\Http\Middleware\Admin::class
+        'admin' => \App\Http\Middleware\Admin::class,
+        'is_active' => \App\Http\Middleware\IsActive::class,
     ];
 }

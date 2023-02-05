@@ -17,12 +17,12 @@ class CreateCandidatesTable extends Migration
             $table->id();
             $table->foreignId('election_id');
             $table->char('type', 1)->comment('1 for king, 2 for queen');
-            $table->foreignId('hall_id');
-            $table->foreignId('department_id');
+            $table->string('hall', 256);
+            $table->string('department', 128);
             $table->string('fullname', 256);
             $table->string('home_district', 256);
             $table->string('thumb', 512);
-            $table->integer('votes');
+            $table->integer('votes')->default(0);
             $table->timestamps();
         });
     }

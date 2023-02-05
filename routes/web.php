@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ElectionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,14 +35,19 @@ Route::get('/registration_status/{user_id}', [UserController::class, 'registrati
 Route::middleware(['auth'])->group(function () {
     /**Admin Routes */
     Route::middleware(['admin'])->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::get('/voters', [UserController::class, 'voters']);
         Route::get('/approval', [UserController::class, 'approvals']);
         Route::get('/user/{user_id}', [UserController::class, 'getUser']);
         Route::post('/update_approval/{user_id}', [UserController::class, 'updateApproval']);
         Route::delete('/delete_user/{user_id}', [UserController::class, 'deleteUser']);
+        Route::get('/election/create', [ElectionController::class, 'create']);
+        Route::post('/election', [ElectionController::class, 'store']);
     });
 
+    Route::get('/elections', [ElectionController::class, 'index'])->middleware('is_active');
+    Route::get('/election/{id}', [ElectionController::class, 'show'])->middleware('is_active');
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     /**Password Change */
     Route::get('/password_change', [UserController::class, 'showChangePasswordForm'])->middleware('auth');

@@ -7,6 +7,7 @@
                 Search
             </div> --}}
             <div class="col-md-12">
+                <h3 class="text-center">Voter List</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>

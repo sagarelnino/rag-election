@@ -14,3 +14,17 @@
 .info tbody, td, tfoot, th, thead, tr {
     text-align: center;
 }
+
+.candidates{
+    gap: 25px;
+    border: 1px solid black;
+    padding: 20px 0;
+    background-color: #D3D3D4;
+}
+
+.vote-candidate{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+

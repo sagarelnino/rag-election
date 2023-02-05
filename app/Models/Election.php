@@ -20,4 +20,9 @@ class Election extends Model
         'end_time',
         'is_active',
     ];
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class);
+    }
 }
