@@ -101,9 +101,17 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="margin-bottom: 60px">
             @yield('content')
         </main>
+        {{-- <footer class="bg-light text-center text-lg-start fixed-bottom">
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2020 Copyright:
+                <a class="text-dark" href="https://techavancer.com/" target="_blank">Techavancer.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer> --}}
     </div>
 </body>
 <script>

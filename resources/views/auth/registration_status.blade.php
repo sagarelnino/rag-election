@@ -14,7 +14,7 @@
                             <img class="img-fluid" src="{{ url('storage/images/' . $user->thumb) }}">
                         </div>
                         <div class="info">
-                            <table class="table table-striped">
+                            {{-- <table class="table table-striped">
                                 <tbody>
                                     <tr>
                                         <th scope="row">Fullname</th>
@@ -59,7 +59,31 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> --}}
+                            <div class="list-group mb-3 text-center">
+                                <li class="list-group-item list-group-item-action">Name :
+                                    {{ $user->name }}</li>
+                                <li class="list-group-item list-group-item-action">Email :
+                                    {{ $user->email }}</li>
+                                <li class="list-group-item list-group-item-action">Approval Status :
+                                    @if ($user->is_approved == true)
+                                        <p class="text-success">Approved
+                                        <p>
+                                        @elseif ($user->is_approved == false)
+                                        <p class="text-danger">Not Approved yet
+                                        <p>
+                                    @endif
+                                </li>
+                                <li class="list-group-item list-group-item-action">Hall :
+                                    {{ $user->hall }}</li>
+                                <li class="list-group-item list-group-item-action">Department :
+                                    {{ $user->department }}</li>
+                                <li class="list-group-item list-group-item-action">Address :
+                                    {{ $user->address }}</li>
+                                <li class="list-group-item list-group-item-action">Home District :
+                                    {{ $user->home_district }}</li>
+                            </div>
+
                             <div class="d-flex justify-content-center">
                                 <a href="/login" class="btn btn-success">LOGIN TO CHECK APPROVAL</a>
                             </div>
