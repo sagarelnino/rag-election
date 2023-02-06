@@ -63,11 +63,10 @@ class InitController extends Controller
             ]);
             DB::commit();
 
-            return redirect()->to('/registration_status/' . $user->id);
+            return redirect()->to('/registration_status/' . $user->id)->with('message', 'Successfully Registered');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
-            return back();
+            return back()->with('error', 'Something went wrong');
         }
     }
 }

@@ -34,7 +34,10 @@ class HomeController extends Controller
             $query->where('users.id', '=', auth()->id());
             $user = $query->first();
             $elections = Election::where('is_active', true)->get();
-            return view('users.user_dashboard', ['user' => $user, 'elections' => $elections]);
+
+            $voters = User::where('is_approved', true)->count();
+            $approvals = User::where('is_approved', false)->count();
+            return view('users.user_dashboard', ['user' => $user, 'elections' => $elections, 'voters' => $voters, 'approvals' => $approvals]);
         }
     }
 }

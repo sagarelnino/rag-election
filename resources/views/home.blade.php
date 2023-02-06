@@ -10,10 +10,10 @@
                     </div>
                     <div class="card-body">
                         <ul>
-                            <li>Elections:</li>
+                            <li>Active Elections: {{ count($elections) }}</li>
                             <li>Candidates: King(2), Queen(2)</li>
-                            <li>Voters:</li>
-                            <li>Waiting for approval:</li>
+                            <li>Voters: {{ $voters }}</li>
+                            <li>Waiting for approval: {{ $approvals }}</li>
                         </ul>
                     </div>
                 </div>
