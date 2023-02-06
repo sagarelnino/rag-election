@@ -78,9 +78,7 @@
                                 <label for="address" class="col-md-4 col-form-label text-md-end">Present Address</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="address" class="form-control @error('address') is-invalid @enderror" name="address" required autofocus>
-                                        {{ old('address') }}
-                                    </textarea>
+                                    <textarea id="address" class="form-control @error('address') is-invalid @enderror" name="address" required>{{ old('address') }}</textarea>
 
                                     @error('address')
                                         <span class="invalid-feedback" role="alert">
