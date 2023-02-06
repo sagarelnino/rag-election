@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="Rag43 Election. Register, get approved and cast your vote">
+    <meta name="keywords" content="Rag43, Election, 43">
+    <meta name="author" content="Shuvashish Paul Sagar">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
