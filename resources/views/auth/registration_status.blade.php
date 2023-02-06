@@ -60,6 +60,9 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                <a href="/login" class="btn btn-success">LOGIN TO CHECK APPROVAL</a>
+                            </div>
                         </div>
                     </div>
                 </div>

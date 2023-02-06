@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Candidate;
 use App\Models\Election;
 use App\Models\User;
+use App\Models\UserVote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -94,7 +95,8 @@ class ElectionController extends Controller
         if (auth()->user()->user_type == User::USER_TYPE_ADMIN) {
             return view('elections.show', ['election' => $election, 'candidates' => $candidates]);
         } elseif (auth()->user()->user_type == User::USER_TYPE_VOTER) {
-            return view('elections.show_user', ['election' => $election, 'candidates' => $candidates]);
+            $hasAlreadyVoted = $this->hasAlreadyVoted($id, auth()->id());
+            return view('elections.show_user', ['election' => $election, 'candidates' => $candidates, 'hasAlreadyVoted' => $hasAlreadyVoted]);
         }
     }
 
@@ -130,5 +132,60 @@ class ElectionController extends Controller
     public function destroy(Election $election)
     {
         //
+    }
+
+    public function vote(Request $request, $election_id)
+    {
+        if ($this->hasAlreadyVoted($election_id, auth()->id()) == true) {
+            return back()->with('warning', 'You have already casted your vote');
+        }
+        if (!$request->has('vote_queen') || $request->vote_queen == '' || !$request->has('vote_king') || $request->vote_king == '') {
+            return back()->with('error', 'Please select one queen and one king');
+        }
+        try {
+            DB::beginTransaction();
+            $candidate_queen = Candidate::find($request->vote_queen);
+            $candidate_queen->votes = $candidate_queen->votes + 1;
+            $candidate_queen->save();
+
+            $candidate_king = Candidate::find($request->vote_king);
+            $candidate_king->votes = $candidate_king->votes + 1;
+            $candidate_king->save();
+
+            UserVote::create([
+                'user_id' => auth()->id(),
+                'election_id' => $election_id
+            ]);
+
+            DB::commit();
+            return redirect()->to('/home')->with('message', 'You have successfully casted your vote');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Something went wrong');
+        }
+    }
+
+    protected function hasAlreadyVoted($election_id, $user_id)
+    {
+        $user_votes = UserVote::where('election_id', $election_id)
+            ->where('user_id', $user_id)
+            ->count();
+        if ($user_votes > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateActivity(Request $request)
+    {
+        $request->validate([
+            'election_id' => 'required',
+            'is_active' => 'required',
+        ]);
+        $activity = $request->is_active == 'true' ? true : false;
+        $election = Election::find($request->election_id);
+        $election->is_active = $activity;
+        $election->save();
+        return back()->with('message', 'Election status changed successfully');
     }
 }

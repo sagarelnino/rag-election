@@ -4,6 +4,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @if ($user->is_approved == false)
+                    <div class="alert alert-warning" role="alert">
+                        You can not browse anything else until you are not approved
+                    </div>
+                @endif
                 <div class="card mt-4" style="background: #d5eadb">
                     <div class="card-header text-center">Your Information</div>
 

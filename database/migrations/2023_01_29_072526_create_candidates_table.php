@@ -15,7 +15,7 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('election_id');
+            $table->foreignId('election_id')->constrained()->onDelete('cascade');
             $table->char('type', 1)->comment('1 for king, 2 for queen');
             $table->string('hall', 256);
             $table->string('department', 128);

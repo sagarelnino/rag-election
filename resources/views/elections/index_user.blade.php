@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                         @foreach ($elections as $election)
-                            @if (App\lib\Common::isElectionGoingOn($election->id))
+                            @if ($election->is_active == true)
                                 <tr>
                                     <td>{{ $election->title }}</td>
                                     <td>{{ $election->start_time }}</td>

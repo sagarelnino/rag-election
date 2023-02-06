@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             HallSeeder::class,
             DepartmentSeeder::class,
+            TestAdminSeeder::class,
         ]);
     }
 }

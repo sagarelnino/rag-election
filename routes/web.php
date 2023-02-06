@@ -42,10 +42,14 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/delete_user/{user_id}', [UserController::class, 'deleteUser']);
         Route::get('/election/create', [ElectionController::class, 'create']);
         Route::post('/election', [ElectionController::class, 'store']);
+        Route::post('/election_activity', [ElectionController::class, 'updateActivity']);
     });
 
-    Route::get('/elections', [ElectionController::class, 'index'])->middleware('is_active');
-    Route::get('/election/{id}', [ElectionController::class, 'show'])->middleware('is_active');
+    Route::middleware('is_active')->group(function () {
+        Route::get('/elections', [ElectionController::class, 'index']);
+        Route::get('/election/{id}', [ElectionController::class, 'show']);
+        Route::post('/vote/{election_id}', [ElectionController::class, 'vote'])->middleware('is_voter');
+    });
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');

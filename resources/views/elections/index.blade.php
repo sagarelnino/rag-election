@@ -30,7 +30,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckChecked"
+                                                election_id={{ $election->id }} id="is_active"
                                                 {{ $election->is_active == true ? 'checked' : '' }}>
                                         </div>
                                     </div>
@@ -45,4 +45,22 @@
             </div>
         </div>
     </div>
+    <form method="post" class="d-none" id="update_activity_form" action="/election_activity">
+        @csrf
+        <input type="text" name="election_id" value="">
+        <input type="text" name="is_active" value="">
+    </form>
+    <script>
+        let check_input = $("#is_active");
+        check_input.on('change', function() {
+            let check = confirm('Are you sure to change status?');
+            if (check == true) {
+                let is_active = this.checked;
+                let election_id = this.getAttribute('election_id');
+                $("input[name='election_id']").val(election_id);
+                $("input[name='is_active']").val(is_active);
+                $("#update_activity_form").submit();
+            }
+        })
+    </script>
 @endsection
