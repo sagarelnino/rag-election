@@ -10,10 +10,10 @@
                     </div>
                     <div class="card-body">
                         <ul>
-                            <li>Active Elections: {{ isset($elections) ? count($elections) : 0 }}</li>
+                            <li>Active Elections: {{ isset($elections) ? $elections : 0 }}</li>
                             <li>Candidates: King(2), Queen(2)</li>
-                            <li>Voters: {{ $voters }}</li>
-                            <li>Waiting for approval: {{ $approvals }}</li>
+                            <li>Voters: {{ isset($voters) ? $voters : 0 }}</li>
+                            <li>Waiting for approval: {{ isset($approvals) ? $approvals : 0 }}</li>
                         </ul>
                     </div>
                 </div>

@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->user()->user_type == User::USER_TYPE_ADMIN) {
-            $elections = Election::where('is_active', true)->get();
+            $elections = Election::where('is_active', true)->count();
             $admins = User::where('is_approved', true)->where('user_type', User::USER_TYPE_ADMIN)->count();
             $voters = User::where('is_approved', true)->where('user_type', User::USER_TYPE_VOTER)->count();
             $approvals = User::where('is_approved', false)->where('user_type', User::USER_TYPE_VOTER)->count();
