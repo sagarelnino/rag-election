@@ -82,6 +82,9 @@
                                     {{ $user->address }}</li>
                                 <li class="list-group-item list-group-item-action">Home District :
                                     {{ $user->home_district }}</li>
+                                <li class="list-group-item list-group-item-action">Facebook Id :
+                                    <a href="{{ $user->facebook_id }}" target="_blank">{{ $user->facebook_id }}</a>
+                                </li>
                             </div>
 
                             <div class="d-flex justify-content-center">
