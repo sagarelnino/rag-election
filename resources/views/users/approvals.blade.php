@@ -20,7 +20,7 @@
                                 @endif
                                 <option value="">Select hall</option>
                                 @foreach ($halls as $hall)
-                                    @if (isset($search['search_hall']))
+                                    @if (isset($search['search_hall']) && $search['search_hall'] == $hall->hall)
                                         @continue
                                     @endif
                                     <option value="{{ $hall->hall }}">{{ $hall->hall }}</option>
@@ -35,7 +35,7 @@
                                 @endif
                                 <option value="">Select department</option>
                                 @foreach ($departments as $department)
-                                    @if (isset($search['search_department']))
+                                    @if (isset($search['search_department']) && $search['search_department'] == $department->department)
                                         @continue
                                     @endif
                                     <option value="{{ $department->department }}">{{ $department->department }}</option>
