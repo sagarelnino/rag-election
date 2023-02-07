@@ -47,19 +47,19 @@ class Candidate extends Model
         ],
         [
             'type' => self::TYPE_QUEEN,
-            'hall' => 'Sheikh Hasina Hall',
-            'department' => 'Department of Drama & Dramatics',
-            'fullname' => 'Shahinur Akter Prity',
-            'home_district' => 'Netrokona',
-            'thumb' => 'prity.jpg'
-        ],
-        [
-            'type' => self::TYPE_QUEEN,
             'hall' => 'Jahanara Imam Hall',
             'department' => 'Department of Philosophy',
             'fullname' => 'Ponny Khan',
             'home_district' => 'Dhaka',
             'thumb' => 'ponny.jpg'
+        ],
+        [
+            'type' => self::TYPE_QUEEN,
+            'hall' => 'Sheikh Hasina Hall',
+            'department' => 'Department of Drama & Dramatics',
+            'fullname' => 'Shahinur Akter Prity',
+            'home_district' => 'Netrokona',
+            'thumb' => 'prity.jpg'
         ],
     ];
 
