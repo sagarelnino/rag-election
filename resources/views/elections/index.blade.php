@@ -9,7 +9,7 @@
                     <a class="btn btn-success" href="/election/create">Add New Election</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="background: #d5eadb">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>

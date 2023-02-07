@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <h3 class="text-center">On Going elections</h3>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="background: #d5eadb">
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
