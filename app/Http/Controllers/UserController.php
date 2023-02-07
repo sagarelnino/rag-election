@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Hall;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Foundation\Auth\User as AuthUser;
@@ -42,25 +44,43 @@ class UserController extends Controller
         return back()->with('message', 'Password has been changed');
     }
 
-    public function voters()
+    public function voters(Request $request)
     {
-        $users = $this->users(true, User::USER_TYPE_VOTER);
-        return view('users.voters', ['users' => $users]);
+        $search_params = $request->all();
+        $users = $this->users(true, User::USER_TYPE_VOTER, $search_params);
+        $halls = Hall::select('hall')->orderBy('hall')->get();
+        $departments = Department::select('department')->orderBy('department')->get();
+        return view('users.voters', ['users' => $users, 'halls' => $halls, 'departments' => $departments, 'search' => $search_params]);
     }
 
-    public function approvals()
+    public function approvals(Request $request)
     {
-        $users = $this->users(false, User::USER_TYPE_VOTER);
-        return view('users.approvals', ['users' => $users]);
+        $search_params = $request->all();
+        $users = $this->users(false, User::USER_TYPE_VOTER, $search_params);
+        $halls = Hall::select('hall')->orderBy('hall')->get();
+        $departments = Department::select('department')->orderBy('department')->get();
+        return view('users.approvals', ['users' => $users, 'halls' => $halls, 'departments' => $departments, 'search' => $search_params]);
     }
 
-    protected function users($is_approved = false, $user_type = User::USER_TYPE_VOTER)
+    protected function users($is_approved = false, $user_type = User::USER_TYPE_VOTER, $search_params)
     {
         $query = User::query();
         $query->select('users.id', 'users.name', 'users.email', 'users.is_approved', 'user_details.hall', 'user_details.department', 'user_details.address', 'user_details.thumb', 'user_details.home_district', 'user_details.facebook_id');
         $query->join('user_details', 'users.id', '=', 'user_details.user_id');
         $query->where('users.is_approved', $is_approved);
         $query->where('users.user_type', $user_type);
+        if (isset($search_params['search_name']) && $search_params['search_name'] != '') {
+            $query->where('users.name', 'like', '%' . $search_params['search_name'] . '%');
+        }
+        if (isset($search_params['search_hall']) && $search_params['search_hall']) {
+            $query->where('user_details.hall', $search_params['search_hall']);
+        }
+        if (isset($search_params['search_department']) && $search_params['search_department']) {
+            $query->where('user_details.department', $search_params['search_department']);
+        }
+        if (isset($search_params['search_address']) && $search_params['search_address'] != '') {
+            $query->where('user_details.address', 'like', '%' . $search_params['search_address'] . '%');
+        }
         $users = $query->get();
         return $users;
     }

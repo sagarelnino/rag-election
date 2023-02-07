@@ -8,6 +8,57 @@
             </div> --}}
             <div class="col-md-12">
                 <h3 class="text-center">Voter List</h3>
+                <form method="get" action="/voters">
+                    <div class="row my-3">
+                        <div class="col-md-3 mb-1">
+                            <input class="form-control"
+                                value="{{ isset($search['search_name']) ? $search['search_name'] : '' }}" type="text"
+                                name="search_name" placeholder="Search for name">
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <select class="form-control" name="search_hall">
+                                @if (isset($search['search_hall']))
+                                    <option value="{{ $search['search_hall'] }}">{{ $search['search_hall'] }}</option>
+                                @endif
+                                <option value="">Select hall</option>
+                                @foreach ($halls as $hall)
+                                    @if (isset($search['search_hall']))
+                                        @continue
+                                    @endif
+                                    <option value="{{ $hall->hall }}">{{ $hall->hall }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <select class="form-control" name="search_department">
+                                @if (isset($search['search_department']))
+                                    <option value="{{ $search['search_department'] }}">{{ $search['search_department'] }}
+                                    </option>
+                                @endif
+                                <option value="">Select department</option>
+                                @foreach ($departments as $department)
+                                    @if (isset($search['search_department']))
+                                        @continue
+                                    @endif
+                                    <option value="{{ $department->department }}">{{ $department->department }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <input class="form-control" type="text"
+                                value="{{ isset($search['search_address']) ? $search['search_address'] : '' }}"
+                                name="search_address" placeholder="Search for address">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex justify-content-center">
+                            <div class="col-md-3">
+                                <a href="/voters" class="btn btn-danger">Clear All</a>
+                                <button type="submit" class="btn btn-success" name="search_submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
