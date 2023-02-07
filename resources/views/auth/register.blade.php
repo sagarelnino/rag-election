@@ -60,7 +60,7 @@
                                         <option value="">Select Department</option>
                                         @if (count($departments) > 0)
                                             @foreach ($departments as $department)
-                                                <option value={{ $department->department }}>{{ $department->department }}
+                                                <option value="{{ $department->department }}">{{ $department->department }}
                                                 </option>
                                             @endforeach
                                         @endif
