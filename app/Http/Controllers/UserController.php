@@ -81,7 +81,7 @@ class UserController extends Controller
         if (isset($search_params['search_address']) && $search_params['search_address'] != '') {
             $query->where('user_details.address', 'like', '%' . $search_params['search_address'] . '%');
         }
-        $users = $query->paginate(10);
+        $users = $query->paginate(15);
         return $users;
     }
 
