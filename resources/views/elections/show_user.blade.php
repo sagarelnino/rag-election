@@ -17,7 +17,7 @@
                     @csrf
                     <div class="mt-3">
                         <h4 class="text-center text-primary">Vote for Queen</h4>
-                        <div class="d-flex justify-content-center candidates">
+                        <div class="candidates">
                             @foreach ($candidates as $candidate)
                                 @if ($candidate->type == App\Models\Candidate::TYPE_QUEEN)
                                     <div class="vote-candidate">

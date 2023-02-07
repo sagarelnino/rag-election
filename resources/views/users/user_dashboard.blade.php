@@ -43,6 +43,9 @@
                                     <a href="{{ $user->facebook_id }}" target="_blank">{{ $user->facebook_id }}</a>
                                 </li>
                             </div>
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-success" href="/elections">Elections</a>
+                            </div>
                         </div>
                     </div>
                 </div>

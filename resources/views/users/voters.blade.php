@@ -8,32 +8,34 @@
             </div> --}}
             <div class="col-md-12">
                 <h3 class="text-center">Voter List</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Fullname</th>
-                            <th scope="col">Hall</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->hall }}</td>
-                                <td>{{ $user->department }}</td>
-                                <td>{{ $user->address }}</td>
-                                <td>
-                                    <a href="/user/{{ $user->id }}" class="btn btn-sm btn-info">View</a>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Fullname</th>
+                                <th scope="col">Hall</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <th scope="row">{{ $user->id }}</th>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->hall }}</td>
+                                    <td>{{ $user->department }}</td>
+                                    <td>{{ $user->address }}</td>
+                                    <td>
+                                        <a href="/user/{{ $user->id }}" class="btn btn-sm btn-info">View</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

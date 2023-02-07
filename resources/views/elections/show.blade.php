@@ -15,7 +15,7 @@
 
                 <div class="mt-3">
                     <h4 class="text-center text-primary">Queens</h4>
-                    <div class="d-flex justify-content-center candidates">
+                    <div class="candidates">
                         @foreach ($candidates as $candidate)
                             @if ($candidate->type == App\Models\Candidate::TYPE_QUEEN)
                                 <div class="card" style="width: 18rem;">
@@ -47,7 +47,7 @@
                                     <img src="{{ url('storage/candidates/' . $candidate->thumb) }}" class="card-img-top"
                                         alt="{{ $candidate->fullname }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $candidate->fullname }}</h5>
+                                        <h5 class="card-title text-center">{{ $candidate->fullname }}</h5>
                                         <div class="card-text pl-2 text-center">
                                             <span>{{ $candidate->department }}</span><br>
                                             <span>{{ $candidate->hall }}</span><br>
