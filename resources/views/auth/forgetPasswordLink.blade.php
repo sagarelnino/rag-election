@@ -1,16 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card mt-4" style="background: #d5eadb">
+                    <div class="card-header">Reset Password</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('password.update') }}">
+                        <form action="{{ route('reset.password.post') }}" method="POST">
                             @csrf
-
                             <input type="hidden" name="token" value="{{ $token }}">
 
                             <div class="row mb-3">
@@ -67,6 +66,12 @@
                         </form>
                     </div>
                 </div>
+
+                @if (Session::has('message'))
+                    <div class="alert alert-warning" role="alert">
+                        Check your spam folder too for reset link
+                    </div>
+                @endif
             </div>
         </div>
     </div>
