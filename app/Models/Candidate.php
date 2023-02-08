@@ -57,7 +57,7 @@ class Candidate extends Model
             'type' => self::TYPE_QUEEN,
             'hall' => 'Sheikh Hasina Hall',
             'department' => 'Department of Drama & Dramatics',
-            'fullname' => 'Shahinur Akter Prity',
+            'fullname' => 'Prity',
             'home_district' => 'Netrokona',
             'thumb' => 'prity.jpg'
         ],

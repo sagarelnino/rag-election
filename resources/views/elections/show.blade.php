@@ -25,8 +25,6 @@
                                         <h5 class="card-title text-center">{{ $candidate->fullname }}</h5>
                                         <div class="card-text pl-2 text-center">
                                             <span>{{ $candidate->department }}</span><br>
-                                            <span>{{ $candidate->hall }}</span><br>
-                                            <span>{{ $candidate->home_district }}</span>
                                         </div>
 
                                         @if (App\lib\Common::isElectionEnded($election->id) == true)
@@ -51,8 +49,6 @@
                                         <h5 class="card-title text-center">{{ $candidate->fullname }}</h5>
                                         <div class="card-text text-center">
                                             <span>{{ $candidate->department }}</span><br>
-                                            <span>{{ $candidate->hall }}</span><br>
-                                            <span>{{ $candidate->home_district }}</span>
                                         </div>
                                         @if (App\lib\Common::isElectionEnded($election->id) == true)
                                             <p class="text-center mt-3"><b>Total Votes: {{ $candidate->votes }}</b></p>

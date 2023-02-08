@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -115,6 +116,12 @@ class UserController extends Controller
             $user->is_approved = false;
             $message = 'Request Declined';
         }
+
+        Mail::send('email.approve', ['is_approved' => $request->status], function ($message) use ($user) {
+            $message->to($user->email);
+            $message->subject('Request to join RAG43 Election');
+        });
+
         $user->save();
 
         return back()->with('message', $message);

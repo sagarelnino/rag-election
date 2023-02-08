@@ -12,6 +12,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'RAG43') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}" />
 
     <!-- Scripts -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" defer></script>
@@ -38,6 +39,7 @@
         <nav class="navbar navbar-light navbar-expand-md shadow-sm" style="background: #F7F7F7">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
+                    <img src="{{ asset('images/logo.png') }}" width="30" height="30" alt="Rag_43_Election">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
