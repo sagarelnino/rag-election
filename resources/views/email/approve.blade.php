@@ -7,7 +7,7 @@
     <a href="{{ route('login') }}">Login</a>
     <br />
     <h3>Notice</h3>
-    <li>You have to cast your vote within Bangladesh time 9AM-5PM(February 10, 2023)</li>
+    <li>You have to cast your vote within Bangladesh time 9AM-7 PM(February 10, 2023)</li>
     <li>After login you will see a green Elections button. Click on the button</li>
     <li>You will see a election list. Click on the VOTE button</li>
     <li>You will be redirected to the election details page</li>

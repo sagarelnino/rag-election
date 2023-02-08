@@ -60,6 +60,41 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 mt-4">
+                <h4 class="text-center">VOTER LIST</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped mt-3" style="background: #d5eadb">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fullname</th>
+                                <th scope="col">Hall</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->hall }}</td>
+                                    <td>{{ $user->department }}</td>
+                                    <td>
+                                        @if ($user->STATUS == 'not yet')
+                                            <p class="text-danger">{{ $user->STATUS }}</p>
+                                        @else
+                                            {{ $user->STATUS }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="/user/{{ $user->id }}" class="btn btn-sm btn-info">View</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
