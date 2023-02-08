@@ -16,7 +16,7 @@
 
                     <div class="card-body">
                         <div class="image-show">
-                            <img src="{{ url('storage/images/' . $user->thumb) }}">
+                            <img class='img-fluid' src="{{ url('storage/images/' . $user->thumb) }}">
                         </div>
                         <div class="info">
                             <div class="list-group mb-3 text-center">
