@@ -39,7 +39,7 @@
                                             <img src="{{ url('storage/candidates/' . $candidate->thumb) }}"
                                                 class="card-img-top" alt="{{ $candidate->fullname }}">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{ $candidate->fullname }}</h5>
+                                                <h5 class="card-title text-center">{{ $candidate->fullname }}</h5>
                                                 <div class="card-text pl-2 text-center">
                                                     <span>{{ $candidate->department }}</span><br>
                                                 </div>
