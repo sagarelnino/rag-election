@@ -118,12 +118,13 @@ class ElectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Election  $election
+     * @param  String $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Election $election)
+    public function edit($id)
     {
-        //
+        $election = Election::find($id);
+        return view('elections.edit', ['election' => $election]);
     }
 
     /**
@@ -133,20 +134,40 @@ class ElectionController extends Controller
      * @param  \App\Models\Election  $election
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Election $election)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:256',
+            'start_time' => 'required',
+            'end_time' => 'required|after:start_time',
+        ]);
+
+        $election = Election::find($id);
+        $election->title = $request->title;
+        $election->start_time = $request->start_time;
+        $election->end_time = $request->end_time;
+        $election->save();
+
+        return back()->with('message', 'Election updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Election  $election
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Election $election)
+    public function destroy(Request $request)
     {
-        //
+        $request->validate([
+            'election_id' => ['required']
+        ]);
+        try {
+            Election::find($request->election_id)->delete();
+            return back()->with('message', 'Election deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Something went wrong');
+        }
     }
 
     public function vote(Request $request, $election_id)
@@ -194,13 +215,26 @@ class ElectionController extends Controller
     public function updateActivity(Request $request)
     {
         $request->validate([
-            'election_id' => 'required',
+            'election_id_activity' => 'required',
             'is_active' => 'required',
         ]);
         $activity = $request->is_active == 'true' ? true : false;
-        $election = Election::find($request->election_id);
+        $election = Election::find($request->election_id_activity);
         $election->is_active = $activity;
         $election->save();
         return back()->with('message', 'Election status changed successfully');
+    }
+
+    public function updateVoteShow(Request $request)
+    {
+        $request->validate([
+            'election_id_show_vote' => 'required',
+            'show_vote' => 'required',
+        ]);
+        $show_vote = $request->show_vote == 'true' ? true : false;
+        $election = Election::find($request->election_id_show_vote);
+        $election->show_vote = $show_vote;
+        $election->save();
+        return back()->with('message', 'Election vote show changed successfully');
     }
 }

@@ -17,6 +17,7 @@
                                 <th scope="col">Start time</th>
                                 <th scope="col">End time</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Vote Show</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -31,13 +32,28 @@
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch"
-                                                    election_id={{ $election->id }} id="is_active"
+                                                    onchange="changeActivity(this)" election_id={{ $election->id }}
+                                                    id="is_active_{{ $election->id }}"
                                                     {{ $election->is_active == true ? 'checked' : '' }}>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    onchange="changeVoteShow(this)" election_id={{ $election->id }}
+                                                    id="show_vote_{{ $election->id }}"
+                                                    {{ $election->show_vote == true ? 'checked' : '' }}>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
                                         <a href="/election/{{ $election->id }}" class="btn btn-sm btn-info">View</a>
+                                        <a href="/election/{{ $election->id }}/edit"
+                                            class="btn btn-sm btn-secondary">Edit</a>
+                                        <button class="btn btn-sm btn-danger" election_id={{ $election->id }}
+                                            onclick="deleteElection(this)">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -49,20 +65,51 @@
     </div>
     <form method="post" class="d-none" id="update_activity_form" action="/election_activity">
         @csrf
-        <input type="text" name="election_id" value="">
+        <input type="text" name="election_id_activity" value="">
         <input type="text" name="is_active" value="">
     </form>
+
+    <form method="post" class="d-none" id="update_show_vote_form" action="/election_vote_show">
+        @csrf
+        <input type="text" name="election_id_show_vote" value="">
+        <input type="text" name="show_vote" value="">
+    </form>
+
+    <form method="post" class="d-none" id="delete_election" action="/election">
+        @method('delete')
+        @csrf
+        <input type="text" name="election_id" value="">
+    </form>
     <script>
-        let check_input = $("#is_active");
-        check_input.on('change', function() {
+        function changeActivity(e) {
             let check = confirm('Are you sure to change status?');
             if (check == true) {
-                let is_active = this.checked;
-                let election_id = this.getAttribute('election_id');
-                $("input[name='election_id']").val(election_id);
+                let is_active = e.checked;
+                let election_id = e.getAttribute('election_id');
+                $("input[name='election_id_activity']").val(election_id);
                 $("input[name='is_active']").val(is_active);
                 $("#update_activity_form").submit();
             }
-        })
+        }
+
+        function changeVoteShow(e) {
+            let check = confirm('Are you sure to change vote show status?');
+            if (check == true) {
+                let show_vote = e.checked;
+                let election_id = e.getAttribute('election_id');
+                $("input[name='election_id_show_vote']").val(election_id);
+                $("input[name='show_vote']").val(show_vote);
+                $("#update_show_vote_form").submit();
+            }
+        }
+
+        function deleteElection(e) {
+            let check = confirm('Are you sure to delete this election?');
+            if (check == true) {
+                let election_id = e.getAttribute('election_id');
+                $("input[name='election_id']").val(election_id);
+                $("#delete_election").submit();
+            }
+        }
     </script>
 @endsection

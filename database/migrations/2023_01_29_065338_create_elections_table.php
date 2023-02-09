@@ -19,6 +19,7 @@ class CreateElectionsTable extends Migration
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->boolean('is_active')->default(false);
+            $table->boolean('show_vote')->default(false);
             $table->timestamps();
         });
     }

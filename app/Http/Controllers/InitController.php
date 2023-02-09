@@ -18,14 +18,32 @@ class InitController extends Controller
         if (Auth::check()) {
             return view('home');
         } else {
+            if ($this->check_time() == false) {
+                return redirect('/login');
+            }
             $halls = Hall::orderBy('hall')->get();
             $departments = Department::orderBy('department')->get();
             return view('auth.register', ['halls' => $halls, 'departments' => $departments]);
         }
     }
 
+    protected function check_time()
+    {
+        date_default_timezone_set("Asia/Dhaka");
+        $current_time = date('Y-m-d H:i:s');
+        $stop_time = date('2023-02-09 17:00:00');
+        if (strtotime($current_time) > strtotime($stop_time)) {
+            return false;
+        }
+        return true;
+    }
+
     public function register(Request $request)
     {
+        if ($this->check_time() == false) {
+            return back()->with('error', 'Registration is not available');
+        }
+
         $request->validate([
             'hall' => ['required', 'string'],
             'department' => ['required', 'string'],

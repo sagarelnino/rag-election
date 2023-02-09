@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/election/create', [ElectionController::class, 'create']);
         Route::post('/election', [ElectionController::class, 'store']);
         Route::post('/election_activity', [ElectionController::class, 'updateActivity']);
+        Route::post('/election_vote_show', [ElectionController::class, 'updateVoteShow']);
+        Route::delete('/election', [ElectionController::class, 'destroy']);
+        Route::get('/election/{id}/edit', [ElectionController::class, 'edit']);
+        Route::patch('/election/{id}', [ElectionController::class, 'update']);
     });
 
     Route::middleware('is_active')->group(function () {
