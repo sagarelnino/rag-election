@@ -27,7 +27,7 @@
                                             <span>{{ $candidate->department }}</span><br>
                                         </div>
 
-                                        @if (App\lib\Common::isElectionEnded($election->id) == true)
+                                        @if (App\lib\Common::isElectionEnded($election->id) == true && $election->show_vote == true)
                                             <p class="text-center mt-3"><b>Total Votes: {{ $candidate->votes }}</b></p>
                                         @endif
                                     </div>
@@ -50,7 +50,7 @@
                                         <div class="card-text text-center">
                                             <span>{{ $candidate->department }}</span><br>
                                         </div>
-                                        @if (App\lib\Common::isElectionEnded($election->id) == true)
+                                        @if (App\lib\Common::isElectionEnded($election->id) == true && $election->show_vote == true)
                                             <p class="text-center mt-3"><b>Total Votes: {{ $candidate->votes }}</b></p>
                                         @endif
                                     </div>
@@ -74,16 +74,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $total_voted = 0; ?>
                             @foreach ($users as $user)
+                                <?php
+                                if ($user->cnt > 0) {
+                                    $total_voted++;
+                                }
+                                ?>
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->hall }}</td>
                                     <td>{{ $user->department }}</td>
                                     <td>
-                                        @if ($user->STATUS == 'not yet')
-                                            <p class="text-danger">{{ $user->STATUS }}</p>
+                                        @if ($user->cnt == 0)
+                                            <p class="text-danger">NOT VOTED YET</p>
                                         @else
-                                            {{ $user->STATUS }}
+                                            <p>Already Voted</p>
                                         @endif
                                     </td>
                                     <td>
@@ -93,6 +99,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <h1 class="text-center">TOTAL VOTE COUNTED: {{ $total_voted }}</h1>
                 </div>
             </div>
         </div>

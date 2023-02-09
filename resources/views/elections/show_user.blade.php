@@ -5,6 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h3 class="text-center">Election Details</h3>
+                @if ($hasAlreadyVoted == true)
+                    <div class="alert alert-danger">
+                        You have already casted your vote
+                    </div>
+                @endif
                 <div class="d-flex justify-content-center my-2">
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-dark"><b>Title: </b>{{ $election->title }}</li>
@@ -22,7 +27,7 @@
                                 @if ($candidate->type == App\Models\Candidate::TYPE_KING)
                                     <div class="vote-candidate">
                                         <div class="form-check">
-                                            @if ($hasAlreadyVoted != true)
+                                            @if ($hasAlreadyVoted != true && App\lib\Common::isElectionGoingOn($election->id) == true)
                                                 <input class="form-check-input" type="radio" name="vote_king"
                                                     id="vote_king_{{ $candidate->id }}" value="{{ $candidate->id }}">
                                                 <label class="form-check-label" for="vote_king_{{ $candidate->id }}">
@@ -39,7 +44,7 @@
                                                     <span>{{ $candidate->department }}</span><br>
                                                 </div>
 
-                                                @if (App\lib\Common::isElectionEnded($election->id) == true)
+                                                @if (App\lib\Common::isElectionEnded($election->id) == true && $election->show_vote == true)
                                                     <p class="text-center mt-3"><b>Total Votes: {{ $candidate->votes }}</b>
                                                     </p>
                                                 @endif
@@ -58,7 +63,7 @@
                                 @if ($candidate->type == App\Models\Candidate::TYPE_QUEEN)
                                     <div class="vote-candidate">
                                         <div class="form-check">
-                                            @if ($hasAlreadyVoted != true)
+                                            @if ($hasAlreadyVoted != true && App\lib\Common::isElectionGoingOn($election->id) == true)
                                                 <input class="form-check-input" type="radio" name="vote_queen"
                                                     id="vote_queen_{{ $candidate->id }}" value="{{ $candidate->id }}">
                                                 <label class="form-check-label" for="vote_queen_{{ $candidate->id }}">
@@ -74,7 +79,7 @@
                                                 <div class="card-text text-center">
                                                     <span>{{ $candidate->department }}</span><br>
                                                 </div>
-                                                @if (App\lib\Common::isElectionEnded($election->id) == true)
+                                                @if (App\lib\Common::isElectionEnded($election->id) == true && $election->show_vote == true)
                                                     <p class="text-center mt-3"><b>Total Votes: {{ $candidate->votes }}</b>
                                                     </p>
                                                 @endif
@@ -86,7 +91,7 @@
                         </div>
                     </div>
 
-                    @if ($hasAlreadyVoted != true)
+                    @if ($hasAlreadyVoted != true && App\lib\Common::isElectionGoingOn($election->id) == true)
                         <div class="d-flex justify-content-center mt-3">
                             <button type="submit" class="btn btn-lg btn-success" onclick="vote()">SUBMIT VOTE</button>
                         </div>

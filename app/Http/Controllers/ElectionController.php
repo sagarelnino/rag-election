@@ -105,10 +105,7 @@ class ElectionController extends Controller
     public function getQuery($election_id)
     {
         $query = "SELECT users.id, users.name,users.user_type,users.email,user_details.hall,user_details.department,user_details.address,";
-        $query .= "(SELECT COUNT(id) FROM user_votes WHERE user_id = users.id AND election_id=" . $election_id . ") AS cnt,";
-        $query .= "CASE WHEN (SELECT COUNT(id) FROM user_votes WHERE user_id = users.id AND election_id=1) = 1 THEN 'voted' ";
-        $query .= "ELSE 'not yet' ";
-        $query .= "END AS STATUS ";
+        $query .= "(SELECT COUNT(id) FROM user_votes WHERE user_id = users.id AND election_id=" . $election_id . ") AS cnt ";
         $query .= "FROM users ";
         $query .= "INNER JOIN user_details ON users.id=user_details.user_id ";
         $query .= "WHERE users.is_approved = true AND users.user_type = " . User::USER_TYPE_VOTER . "";
